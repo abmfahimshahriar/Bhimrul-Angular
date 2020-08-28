@@ -14,7 +14,7 @@ export class AdminAuthGaurdService implements CanActivate {
 
   canActivate(): Observable<boolean> {
     return this.auth.appUser$.pipe(
-        map(appUser => appUser.isAdmin) // Mapping App user observable to a boolean observable
+        map(appUser => appUser.isAdmin)
     );
   }
 }

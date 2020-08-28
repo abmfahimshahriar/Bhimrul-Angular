@@ -18,8 +18,6 @@ export class UserService {
   }
 
   get(uid: string): Observable<AppUser> {
-    // By default, the AngularFireObject is a service for manipulating and streaming object data
-    // We've used valueChanges() to unwrap the Firebase DataSnapshot
     return this.db.object<AppUser>('/users/' + uid).valueChanges();
   }
 }
