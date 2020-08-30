@@ -1,0 +1,30 @@
+import { ShoppingCartService } from '../../../shared/services/shopping-cart.service';
+import { AuthService } from '../../../shared/services/auth.service';
+import { Component, OnInit } from '@angular/core';
+import { AppUser } from '../../../shared/models/app-user';
+import { Observable } from 'rxjs';
+import { ShoppingCart } from '../../../shared/models/shopping-cart';
+
+@Component({
+  selector: 'bc-navbar',
+  templateUrl: './bc-navbar.component.html',
+  styleUrls: ['./bc-navbar.component.css']
+})
+export class BcNavbarComponent implements OnInit {
+  appUser: AppUser;
+  cart$: Observable<ShoppingCart>
+
+  constructor(private auth: AuthService, private shoppingCartService: ShoppingCartService) {
+    
+  }
+
+  async ngOnInit() {
+    this.auth.appUser$.subscribe(appUser => this.appUser = appUser);
+    this.cart$ = await this.shoppingCartService.getCart();
+    
+  }
+  logout() {
+    this.auth.logout();
+  }
+
+}
